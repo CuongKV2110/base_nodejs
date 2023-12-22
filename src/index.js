@@ -15,15 +15,15 @@ app.use(
     }),
 );
 
-        app.use(express.json());
+app.use(express.json());
 // app.use(morgan('combined'))
 
-        app.engine('hbs', handlebars.engine({ extname: '.hbs' }));
+app.engine('hbs', handlebars.engine({ extname: '.hbs' }));
 
-      app.set('view engine', 'hbs');
+app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
-        app.get('/users', (request, response) => {
+app.get('/users', (request, response) => {
     response.send(users);
 });
 
