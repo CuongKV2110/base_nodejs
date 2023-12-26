@@ -1,7 +1,16 @@
+const Menu = require('../models/Menu')
+const { multipleMongooseToObject } = require('../../util/mongoose');
 class SiteController {
     //[Get] home
-    index(req, res) {
-        res.render('home');
+    async index(req, res, next) {
+        Menu.find({}).
+            then(menus => {
+                res.render('home', {
+                    menus: multipleMongooseToObject(menus)
+                });
+            })
+            .catch(next);
+
     }
 
     //[Get] search

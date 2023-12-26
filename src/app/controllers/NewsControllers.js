@@ -5,8 +5,8 @@ class NewsController {
     }
 
     show(req, res) {
-        res.send('hehhheheh');
+        res.render('search');
     }
 }
-
+ 
 module.exports = new NewsController();
