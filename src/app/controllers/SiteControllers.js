@@ -5,6 +5,7 @@ class SiteController {
     async index(req, res, next) {
         Menu.find({}).
             then(menus => {
+                console.log(menus.length);
                 res.render('home', {
                     menus: multipleMongooseToObject(menus)
                 });
@@ -17,6 +18,7 @@ class SiteController {
     search(req, res) {
         res.render('search');
     }
+
 }
 
 module.exports = new SiteController();

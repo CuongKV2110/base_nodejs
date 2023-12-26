@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const app = express();
+const bodyParser = require('body-parser');
 const port = 3000;
 const users = require('./resources/models/users');
 const list_menu = require('./resources/models/menu_item');
@@ -12,7 +13,6 @@ const db = require('./config/db');
 //Connect to DB
 
 db.connect();
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
     express.urlencoded({
