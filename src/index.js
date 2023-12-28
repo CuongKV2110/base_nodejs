@@ -9,6 +9,7 @@ const users = require('./resources/models/users');
 const list_menu = require('./resources/models/menu_item');
 const route = require('./routes');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 
 //Connect to DB
 
@@ -19,15 +20,20 @@ app.use(
         extended: true,
     }),
 );
-
+app.use(methodOverride('_method'))
 app.use(express.json());
 // app.use(morgan('combined'))
 
-app.engine('hbs', handlebars.engine({ extname: '.hbs' }));
+app.engine('hbs', handlebars.engine({
+    extname: '.hbs',
+    helpers: {
+        sum: (a, b) => a + b,
+    }
+}));
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
- 
+
 app.get('/users', (request, response) => {
     response.send(users);
 });

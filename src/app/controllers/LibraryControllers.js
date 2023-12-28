@@ -16,11 +16,11 @@ class LibraryController {
 
 
     detail(req, res, next) {
-        Library.findOne({ type: req.params.type })
+        Library.findOne({ image: req.params.image })
             .then(
                 library => {
-
-                    res.render('item/show', { library: mongooseToObject(library) });
+                    console.log(library);
+                    res.render('item/library_detail', { library: mongooseToObject(library) });
                 }
             )
             .catch(next);
@@ -30,8 +30,7 @@ class LibraryController {
         res.render('create/create');
     }
 
-    store(req, res, next) {
-        console.log(req.body);
+    async store(req, res, next) {
         const library = new Library({
             type: req.body.type,
             name: req.body.name,
@@ -41,10 +40,8 @@ class LibraryController {
             views: parseInt(req.body.views, 10),
         });
         console.log(parseInt(req.body.views, 10));
-        library.save().then(() => res.redirect('/')).catch(error => { });
+        await library.save().then(() => res.redirect('/library')).catch(error => { });
     }
-
-
 }
 
 module.exports = new LibraryController();

@@ -3,16 +3,16 @@
         {{#each listLibrary}}
         <div class="col-sm-6">
             <div class="card mt-4" style="margin-bottom: 10px;">
-                <div class="iframe-container" style="display: flex; justify-content: center; margin-top: 6px;">
-                    <iframe width="560" height="315" src={{this.url}} title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div>
+                <a class="image" style="display: flex; justify-content: center; margin-top: 6px;">
+                        <img width="560" height="315" src="https://img.youtube.com/vi/{{this.image}}/sddefault.jpg" alt="" />
+                    </a>
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 30px;">{{this.name}}</h5>
                     <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         {{this.description}}</p>
-                    <a href="/library/{{this.type}}" class="btn btn-primary" style="background-color: gray;">View
+                    <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        {{this.views}} viewers</p>
+                    <a href="/library/{{this.image}}" class="btn btn-primary" style="background-color: gray;">View
                         details</a>
                 </div>
 

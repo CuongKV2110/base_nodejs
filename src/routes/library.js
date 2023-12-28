@@ -7,7 +7,7 @@ router.get('/create', libraryController.create);
 
 router.post('/store', libraryController.store);
 
-router.get('/:type', libraryController.detail);
+router.get('/:image', libraryController.detail);
 
 router.get('/', libraryController.index);
 

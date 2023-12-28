@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Views</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {{#each listLibrary}}
+    <tr>
+      <th scope="row">{{ sum @index 1}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.type}}</td>
+      <td>{{this.views}}</td>
+      <td>
+        <a href="/store/{{this._id}}/edit" class="btn ">Edit</a>
+         <a class="btn ">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+</table>

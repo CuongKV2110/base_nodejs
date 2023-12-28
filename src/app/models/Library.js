@@ -10,6 +10,7 @@ const Library = new Schema({
     image: String,
     url: String,
     views: Number,
+    // slug: { type: String, slug: "name", unique: true, }
 });
 
 module.exports = mongoose.model('Library', Library, 'library');

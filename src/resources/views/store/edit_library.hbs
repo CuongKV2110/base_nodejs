@@ -1,0 +1,39 @@
+<div class="mt-4">
+    <h1>Update Data</h1>
+    <form method="POST" action="/store/{{library._id}}?_method=PUT">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ten bai hat</label>
+            <input type="text" class="form-control" value="{{library.name}}" name="name">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Mo ta</label>
+            <textarea class="form-control"  name="description">{{library.description}}</textarea>
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Image</label>
+            <input type="text" class="form-control" value="{{library.image}}" name="image">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">The loai</label>
+            <input type="text" class="form-control" value="{{library.type}}" name="type">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Link bai hat</label>
+            <input type="text" class="form-control" value="{{library.url}}" name="url">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Views</label>
+            <input type="number" class="form-control" value="{{library.views}}" name="views">
+
+        </div>
+</div>
+
+
+<button type="submit" class="btn btn-primary">Update data</button>
+</form>
+</div>
