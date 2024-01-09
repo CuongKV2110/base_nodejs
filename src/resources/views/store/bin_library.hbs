@@ -1,0 +1,82 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Views</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {{#each listLibrary}}
+        <tr>
+            <th scope="row">{{ sum @index 1}}</th>
+            <td>{{this.name}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.views}}</td>
+            <td>
+                <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
+                <a class="btn-delete" data-bs-toggle="modal" data-bs-target="#delete-modal" data-id="{{this._id}}">Xóa
+                    vĩnh viễn</a>
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="5" class="text-center">
+                Bạn chưa đăng sản phẩm nào.
+                <a href="/library/create">
+                    Đăng sản phẩm
+                </a>
+            </td>
+        </tr>
+        {{/each}}
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirrm delete item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa vĩnh viễn bản ghi này không ???
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-delete-modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form name="delete-form" method="POST" action=""></form>
+<form name="restore-form" method="POST" action=""></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var btnRestore = document.querySelectorAll('.btn-restore');
+        var deleteForm = document.forms['delete-form'];
+        var btnDelete = document.getElementById('btn-delete-modal');
+        var button = event.relatedTarget;
+        idItem = button.getAttribute('data-id')
+        console.log(idItem);
+        
+        btnDelete.onclick = function () {
+            deleteForm.action = '/store/' + idItem + '/force?_method=DELETE';
+            deleteForm.submit();
+        }
+        btnRestore.forEach(function (restoreButton) {
+            restoreButton.addEventListener('click', function (e) {
+                // Get the _id from the data-id attribute of the clicked element
+                var idItem = this.getAttribute('data-id');
+
+                // Chuyển hướng trực tiếp đến route /store/:id/restore
+                window.location.href = '/store/' + idItem + '/restore?_method=PATCH';
+            });
+        });
+    });
+</script>

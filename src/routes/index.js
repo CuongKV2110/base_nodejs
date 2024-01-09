@@ -6,12 +6,10 @@ const storeRouter = require('./store');
 
 
 function route(app) {
-    
     app.use('/news', newsRouter);
     app.use('/item', itemRouter);
     app.use('/library', libraryRouter);
     app.use('/store', storeRouter);
-
     app.use('/', siteRouter);
 }
 

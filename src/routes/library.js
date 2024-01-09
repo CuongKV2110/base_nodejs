@@ -11,7 +11,4 @@ router.get('/:image', libraryController.detail);
 
 router.get('/', libraryController.index);
 
-
-
-
 module.exports = router;

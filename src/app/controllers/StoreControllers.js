@@ -5,13 +5,29 @@ const { mongooseToObject } = require('../../util/mongoose');
 class StoreController {
     //[Get] list Library
     async index(req, res, next) {
-        Library.find({}).then(
-            listLibrary => {
+        Promise.all([Library.find({}), Library.countDocumentsDeleted()])
+            .then(([listLibrary, deletedCount]) => {
                 res.render('store/list_library', {
+                    deletedCount,
                     listLibrary: multipleMongooseToObject(listLibrary)
                 })
-            }
-        ).catch(next);
+            })
+            .catch(next);
+
+    }
+
+    bin(req, res, next) {
+        Library.findDeleted({})
+            .then((listLibrary) => {
+                console.log('List of deleted libraries:', listLibrary);
+                res.render('store/bin_library', {
+                    listLibrary: multipleMongooseToObject(listLibrary)
+                });
+            })
+            .catch((error) => {
+                console.log('Error:', error);
+                res.status(500).send('Internal Server Error');
+            });
     }
 
     //[Get] store/:id/edit
@@ -34,6 +50,32 @@ class StoreController {
                 () => res.redirect('/library')
             )
             .catch(next);
+    }
+
+    restore(req, res, next) {
+        console.log('A');
+        Library.restore({ _id: req.params.id })
+            .then(
+                () => res.redirect('/store')
+            )
+            .catch(next);
+    }
+
+    delete(req, res, next) {
+        Library.delete({ _id: req.params.id })
+            .then(
+                () => res.redirect('back')
+            )
+            .catch(next);
+
+    }
+
+    forceDelete(req, res, next) {
+        Library.deleteOne({ _id: req.params.id })
+            .then(
+                () => res.redirect('back')
+            )
+            .catch(console.log('heheh'));
 
     }
 

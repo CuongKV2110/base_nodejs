@@ -13,6 +13,16 @@ class SiteController {
             .catch(next);
 
     }
+    
+    async getListMenu(req, res, next) {
+        Menu.find({}).
+            then(listMenu => {
+
+                res.send(listMenu);
+            })
+            .catch(next);
+
+    }
 
     //[Get] search
     search(req, res) {
@@ -35,6 +45,24 @@ class SiteController {
                 () => res.redirect('/')
             )
             .catch(next);
+    }
+
+    async createCourse(req, res, next) {
+        try {
+            const course = new Menu({
+                type: req.body.type,
+                name: req.body.name,
+                detail: req.body.detail,
+                price: req.body.price,
+                image: req.body.image,
+            });
+        
+            await course.save();
+            res.send('success');
+        } catch (error) {
+            console.error('Error:', error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 
 }

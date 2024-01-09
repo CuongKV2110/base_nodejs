@@ -38,7 +38,7 @@ app.get('/users', (request, response) => {
     response.send(users);
 });
 
-app.get('/list_menu', (request, response) => {
+app.get('/list_food', (request, response) => {
     response.send(list_menu);
 });
 //Route init

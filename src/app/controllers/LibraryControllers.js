@@ -5,6 +5,7 @@ const { mongooseToObject } = require('../../util/mongoose');
 class LibraryController {
     //[Get] list Library
     async index(req, res, next) {
+        console.log("HIC");
         Library.find({}).then(
             listLibrary => {
                 res.render('library', {
@@ -13,7 +14,6 @@ class LibraryController {
             }
         ).catch(next);
     }
-
 
     detail(req, res, next) {
         Library.findOne({ image: req.params.image })
@@ -31,16 +31,22 @@ class LibraryController {
     }
 
     async store(req, res, next) {
-        const library = new Library({
-            type: req.body.type,
-            name: req.body.name,
-            description: req.body.description,
-            image: req.body.image,
-            url: req.body.url,
-            views: parseInt(req.body.views, 10),
-        });
-        console.log(parseInt(req.body.views, 10));
-        await library.save().then(() => res.redirect('/library')).catch(error => { });
+        try {
+            const library = new Library({
+                type: req.body.type,
+                name: req.body.name,
+                description: req.body.description,
+                image: req.body.image,
+                url: req.body.url,
+                views: parseInt(req.body.views, 10),
+            });
+            console.log(parseInt(req.body.views, 10));
+            await library.save();
+            res.redirect('/library');
+        } catch (error) {
+            console.error('Error:', error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 }
 
