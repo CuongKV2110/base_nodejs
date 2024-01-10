@@ -20,7 +20,7 @@ app.use(
         extended: true,
     }),
 );
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
 app.use(express.json());
 // app.use(morgan('combined'))
 

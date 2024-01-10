@@ -46,7 +46,7 @@ class StoreController {
     update(req, res, next) {
         Library.updateOne({ _id: req.params.id }, req.body)
             .then(
-
+                
                 () => res.redirect('/library')
             )
             .catch(next);
